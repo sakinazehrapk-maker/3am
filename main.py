@@ -114,3 +114,13 @@ Commands:
   help          show this
   quit          give up
 """)
+def intro():
+    print("=" * 46)
+    slow("          3 : 0 0   A . M .", 0.08)
+    print("=" * 46)
+    slow("You wake up for no reason. The whole house is silent.")
+    slow("Too silent. Then... a slow scratching from downstairs.")
+    slow("You can either find the KEY and escape through the front door,")
+    slow("or survive until 4:00 AM when the ghost goes away.")
+    slow("Each move costs time. The ghost is hunting you.")
+    show_help()
