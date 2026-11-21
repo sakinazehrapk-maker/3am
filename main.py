@@ -26,3 +26,10 @@ DESCRIPTIONS={
     "kitchen":"the kitchen. the fridge hums and one cbinet door slowly swings open by itself",
     "basement":"the basement. cold. dark. someting is breathing down there (not you)",
 }
+player = "bedroom"
+ghost="basement"
+has_flashlight=False
+has_key=False
+battery=2
+minutes=0
+items ={"bedroom":"falshlight","kitchen":"key"}
