@@ -124,3 +124,74 @@ def intro():
     slow("or survive until 4:00 AM when the ghost goes away.")
     slow("Each move costs time. The ghost is hunting you.")
     show_help()
+def main():
+    global player, has_flashlight, has_key, minutes
+    intro()
+    slow(DESCRIPTIONS[player])
+    if player in items:
+        slow(f"You see a {items[player]} here.")
+    while True:
+        if minutes >= 60:
+            win("The sun starts to peek through the curtains. The whispering stops.")
+
+        print(f"\n[{clock()}] You're in the {player}. Exits: {', '.join(HOUSE[player])}")
+        cmd = input("> ").strip().lower()
+        if cmd in ("quit", "exit"):
+            slow("You hide under the blanket forever. Coward.")
+            return
+        elif cmd == "help":
+            show_help()
+            continue
+        elif cmd == "look":
+            slow(DESCRIPTIONS[player])
+            if player in items:
+                slow(f"You see a {items[player]} here.")
+            continue
+        elif cmd.startswith("go "):
+            dest = cmd[3:].strip()
+            if dest in HOUSE[player]:
+                player = dest
+                minutes += 4
+                print()
+                slow(DESCRIPTIONS[player])
+                if player in items:
+                    slow(f"You see a {items[player]} here.")
+            else:
+                slow("You can't go there from here.")
+                continue
+        elif cmd == "take":
+            if player in items:
+                thing = items.pop(player)
+                if thing == "flashlight":
+                    has_flashlight = True
+                    slow("You grab the flashlight. It works! ...for a bit.")
+                elif thing == "key":
+                    has_key = True
+                    slow("You grab a rusty key. It's ice cold.")
+                minutes += 2
+            else:
+                slow("There's nothing to take here.")
+                continue
+        elif cmd == "open door":
+            if player != "hallway":
+                slow("The front door is in the hallway.")
+                continue
+            if has_key:
+                win("The key turns. You sprint out into the cold night air.")
+            else:
+                slow("Locked. You need a key. Something laughs behind you.")
+                minutes += 3
+        else:
+            slow("Huh? Type 'help' if you're lost.")
+            continue
+        move_ghost()
+        if ghost == player:
+            if not ghost_encounter():
+                game_over()
+        else:
+            hints()
+if __name__ == "__main__":
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("\nYou ran away. Smart.")
