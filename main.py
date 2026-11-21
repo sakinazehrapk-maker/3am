@@ -36,3 +36,25 @@ items ={"bedroom":"falshlight","kitchen":"key"}
 
 def clock():
     return f"3:{minutes:02d} AM"
+
+def next_step_toward(start, goal):
+    """BFS so the ghost can chase you (yes i googled this)"""
+    if start == goal:
+        return start
+    queue =[(start, [start])]
+    seen={start}
+    while queue:
+        room, path = queue.pop(0)
+        for n in HOUSE[room]:
+            if n == goal:
+                return (path + [n])[1]
+            if n not in seen:
+                seen.add(n)
+                queue.append((n, path + [n]))
+    return start
+def move_ghost():
+    global ghost
+    if random.random() < 0.55:
+        ghost = next_step_toward(ghost, player)
+    else:
+        ghost = random.choice(HOUSE[ghost])
