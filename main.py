@@ -72,3 +72,21 @@ def hints():
             "you hear humming. its a lullaby. nobody lives here who hums.",
             "Your phone buzzes. Unknown number. It just says: 'behind you'.",
         ]))
+def ghost_encounter():
+    """returns True if you survive"""
+    global battery, ghost
+    print()
+    slow("!!! THE GHOST IS IN THE ROOM !!!", 0.05)
+    if has_flashlight and battery > 0:
+        slow("Type 'light' to blast it with your flashlight!")
+        start = time.time()
+        answer = input("> ").strip().lower()
+        if answer == "light" and time.time() - start < 5:
+            battery -= 1
+            ghost = "basement"
+            slow("The beam hits it. It SCREAMS and melts into the walls.")
+            slow(f"(flashlight battery: {battery} left)")
+            return True
+    else:
+        slow("You reach for a flashlight... but you don't have one (or it's dead).")
+    return False
