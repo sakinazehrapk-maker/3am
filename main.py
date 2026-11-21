@@ -33,3 +33,6 @@ has_key=False
 battery=2
 minutes=0
 items ={"bedroom":"falshlight","kitchen":"key"}
+
+def clock():
+    return f"3:{minutes:02d} AM"
