@@ -58,3 +58,17 @@ def move_ghost():
         ghost = next_step_toward(ghost, player)
     else:
         ghost = random.choice(HOUSE[ghost])
+
+def hints():
+    if ghost in HOUSE[player]:
+        slow(random.choice([
+            "you hear scratching from the next room...",
+            "a cold breeze creeps under the door. something is CLOSE.",
+            "someone whispers your name. from the room next to you.",
+        ]))
+    elif random.random() < 0.3:
+        slow(random.choice([
+            "somewhere in the house, a floorboard creaks.",
+            "you hear humming. its a lullaby. nobody lives here who hums.",
+            "Your phone buzzes. Unknown number. It just says: 'behind you'.",
+        ]))
