@@ -104,3 +104,13 @@ def win(text):
     pause()
     slow("YOU SURVIVED THE 3 AM. Go to sleep. (Lol, good luck.)", 0.05)
     sys.exit()
+def show_help():
+    print("""
+Commands:
+  go <room>     move (ex: go hallway)
+  take          pick up an item in the room
+  open door     try to escape (hallway only)
+  look          look around again
+  help          show this
+  quit          give up
+""")
