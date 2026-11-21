@@ -90,3 +90,17 @@ def ghost_encounter():
     else:
         slow("You reach for a flashlight... but you don't have one (or it's dead).")
     return False
+def game_over():
+    pause()
+    slow("Everything goes cold. The lights go out.")
+    pause()
+    slow("The last thing you see is your phone: 3:" + f"{minutes:02d}" + " AM.")
+    pause()
+    slow("YOU DIED. Better luck next night.", 0.06)
+    sys.exit()
+def win(text):
+    pause()
+    slow(text)
+    pause()
+    slow("YOU SURVIVED THE 3 AM. Go to sleep. (Lol, good luck.)", 0.05)
+    sys.exit()
